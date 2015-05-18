@@ -8,19 +8,39 @@ function getActive (min,max,val) {
 	else return false
 }
 
+var categories = [
+	{
+		name:"Snack",
+		min:5,
+		max:49,
+		backgroundColor:'#EC5766',
+		additionalInfo:'This is the additional info for snack.'
+	},
+	{
+		name:"Supplies",
+		min:50,
+		max:249,
+		backgroundColor:'#F7B33B',
+		additionalInfo:'This is the additional info for supplies.'
+	}
+]
+
 var DonateCategories = React.createClass({
 	render: function () {
+		var categoryNodes = categories.map(function(el){
+			return (
+				<Category 
+					name={el.name} 
+					active={getActive(el.min,el.max,this.props.value)} 
+					backgroundColor={el.backgroundColor} 
+					additionalInfo={el.additionalInfo} > 
+						{el.name} 
+				</Category>
+			)
+		}, this)
 		return (
 			<ul className="categories">
-				<Category 
-					name="party" 
-					active={getActive(5, 49, this.props.value)}
-					backgroundColor="#ccc"> 
-						example 
-					</Category>
-				<Category name="party" active={getActive(50, 249, this.props.value)}> example #2 </Category>
-				<Category name="party" active={getActive(250, 1000, this.props.value)}> example #3 </Category>
-				<Category name="party" active={getActive(1000, 2500, this.props.value)}> example #4 </Category>
+				{categoryNodes}
 			</ul>
 		)
 	}

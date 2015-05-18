@@ -3,19 +3,19 @@ var React = require('react'),
 
 var Category = React.createClass({
 
-	getStyle: function () {
+	addColor: function () {
 		return {
 			backgroundColor: this.props.backgroundColor,
-			position:'absolute',
-			left:'0'
+			color:'#ffffff'
 		}
 	},
 
 	getMoreInfo: function (active) {
 		return active ?
-			<div className="additionalInfo">
-				<div className="active-background" style={this.getStyle()}/>
-				This is more about the active class
+			<div className="active-info">
+				<div className="additional-info">
+					{this.props.additionalInfo}
+				</div>
 			</div>
 			: null
 	},
@@ -26,9 +26,14 @@ var Category = React.createClass({
 		}
 	},
 	render: function() {
+		var style = {}
+		if(this.props.active)
+			style = this.addColor()
 		return (
-			<li className={this.props.name}>
-				Info about the class
+			<li className='category'>
+				<div style={style}>
+					{this.props.name}
+				</div>
 				{this.getMoreInfo(this.props.active)}
 			</li>
 		)

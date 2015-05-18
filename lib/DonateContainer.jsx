@@ -6,18 +6,29 @@ var React = require('react'),
 		ValueActions = require('lib/actions/ValueActions'),
 		ValueStore = require('lib/stores/ValueStore')
 
+var postionAbsolute = {
+	position:'absolute',
+	WebkitUserSelect:'none'
+}
+
 var DonateContainer = React.createClass({
 
 	mixins: [React.addons.LinkedStateMixin],
 
 	getInitialState: function() {
 		return {
-			value: 100
+			value: 5
 		};
 	},
 	
-	sliderChange: function (e) {
+	sliderChange: function () {
 		value = Math.floor(this.refs.slider.getValue())
+		ValueActions.update(value)
+	},
+
+	textChange: function () {
+		value = parseInt(this.refs.text.getValue()) || ''
+		this.refs.slider.setValue(value)
 		ValueActions.update(value)
 	},
 
@@ -33,8 +44,8 @@ var DonateContainer = React.createClass({
 		return (
 			<div className="donate-container">
 				<DonateCategories value={this.state.value} />
-				<TextField ref="text" valueLink={this.linkState('value')} />
-				<Slider min={5} max={2500} name="valueSlider" ref="slider" value={this.state.value} onChange={this.sliderChange} />
+				<TextField ref="text" value={this.state.value} onChange={this.textChange} />
+				<Slider min={5} max={2500} style={postionAbsolute} name="valueSlider" ref="slider" onChange={this.sliderChange} />
 			</div>
 		)
 	},
