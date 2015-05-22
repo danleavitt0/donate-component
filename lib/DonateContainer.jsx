@@ -28,7 +28,6 @@ var DonateContainer = React.createClass({
 
 	textChange: function () {
 		value = parseInt(this.refs.text.getValue()) || ''
-		this.refs.slider.setValue(value)
 		ValueActions.update(value)
 	},
 
@@ -43,16 +42,23 @@ var DonateContainer = React.createClass({
 	render: function () {
 		return (
 			<div className="donate-container">
-				<DonateCategories value={this.state.value} />
-				<TextField ref="text" value={this.state.value} onChange={this.textChange} />
-				<Slider min={5} max={2500} style={postionAbsolute} name="valueSlider" ref="slider" onChange={this.sliderChange} />
+				<div className="inner-donate-container">
+					<DonateCategories value={this.state.value} />
+					<TextField ref="text" value={this.state.value} onChange={this.textChange} />
+					<Slider min={5} max={2500} style={postionAbsolute} name="valueSlider" ref="slider" onChange={this.sliderChange} />
+				</div>
 			</div>
 		)
 	},
 
 	_onchange: function () {
+		var newValue = ValueStore.getValue()
+		console.log(this.refs.slider.state.dragging)
+		if(!this.refs.slider.state.dragging)
+			this.refs.slider.setValue(newValue)
+
 		this.setState({
-			value: ValueStore.getValue()
+			value: newValue
 		})
 	}
 

@@ -1,5 +1,6 @@
 var React = require('react'),
-		mui = require('material-ui')
+		mui = require('material-ui'),
+		ValueActions = require('lib/actions/ValueActions')
 
 var Category = React.createClass({
 
@@ -19,24 +20,30 @@ var Category = React.createClass({
 			</div>
 			: null
 	},
+
 	getDefaultProps: function() {
 		return {
 			name: "Default",
 			active: false
 		}
 	},
+
 	render: function() {
 		var style = {}
 		if(this.props.active)
 			style = this.addColor()
 		return (
-			<li className='category'>
-				<div style={style}>
+			<li onClick={this._handleClick} className="category">
+				<div className="category-title" style={style}>
 					{this.props.name}
 				</div>
 				{this.getMoreInfo(this.props.active)}
 			</li>
 		)
+	},
+
+	_handleClick: function () {
+		ValueActions.update(this.props.min)
 	}
 })
 

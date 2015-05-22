@@ -22,6 +22,13 @@ var categories = [
 		max:249,
 		backgroundColor:'#F7B33B',
 		additionalInfo:'This is the additional info for supplies.'
+	},
+	{
+		name:"Enrichment",
+		min:250,
+		max:500,
+		backgroundColor:'#69B7E3',
+		additionalInfo:'This is additional info for enrichment'
 	}
 ]
 
@@ -33,7 +40,8 @@ var DonateCategories = React.createClass({
 					name={el.name} 
 					active={getActive(el.min,el.max,this.props.value)} 
 					backgroundColor={el.backgroundColor} 
-					additionalInfo={el.additionalInfo} > 
+					additionalInfo={el.additionalInfo} 
+					min={el.min} > 
 						{el.name} 
 				</Category>
 			)
@@ -43,7 +51,9 @@ var DonateCategories = React.createClass({
 				{categoryNodes}
 			</ul>
 		)
-	}
+	},
+
+
 })
 
 module.exports = DonateCategories

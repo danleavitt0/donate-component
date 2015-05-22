@@ -1,7 +1,7 @@
 {
-  "name": "react-boilerplate",
+  "name": "web-donate",
   "version": "1.0.0",
-  "description": "Boiler plate for 9 Dots code camp",
+  "description": "A donate component",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
