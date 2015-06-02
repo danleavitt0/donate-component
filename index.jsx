@@ -1,9 +1,9 @@
-require('lib/style.less')
-
 var React = require('react'),
 		injectTapEventPlugin = require('react-tap-event-plugin'),
 		ValueStore = require('lib/stores/ValueStore'),
-		DonateContainer = require('lib/DonateContainer.jsx')
+		DonateContainer = require('lib/DonateContainer.jsx'),
+		ThemeManager = require('material-ui/lib/styles/theme-manager')()
+
 
 injectTapEventPlugin()
 
@@ -15,10 +15,22 @@ var App = React.createClass({
 		}
 	},
 
+	childContextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+
+  getChildContext: function() {
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    }
+  },
+
+
 	render: function() {
 	return (
 		<div className="main-container">
-			<DonateContainer />
+			<DonateContainer 
+			/>
 		</div>
 	)}
 
